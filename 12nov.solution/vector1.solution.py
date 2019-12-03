@@ -10,7 +10,7 @@ def normalize(word):
 # la liste de mots w et c:
 vocabulary = []
 
-f = open("words.lst", "r")
+f = open("words.txt", "r")
 for line in f:
   w = (line.rstrip())
   vocabulary.append(w)
@@ -39,16 +39,16 @@ def main():
               if words[i] in vocabulary:
                 M[vocabulary.index(normalize(words[k])), vocabulary.index(normalize(words[i]))] += 1
             #    print (normalize(words[k]) + ' ' + normalize(words[i]) + ' ' + str(M[vocabulary.index(normalize(words[k])), vocabulary.index(normalize(words[i]))]))
-      
-#  print(M)      
+
+#  print(M)
 
   user = input("Entrez deux mots: ")
   ws = user.split()
-  try: 
+  try:
     print(M[vocabulary.index(normalize(ws[0])),vocabulary.index(normalize(ws[1]))])
   except ValueError:
     print("Je ne trouve pas ce mot.")
-  
-  
+
+
 if __name__ == '__main__':
   main()

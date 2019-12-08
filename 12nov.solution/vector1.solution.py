@@ -36,7 +36,7 @@ def main():
             i += 1
           else:
             if i >= 0 and i <= len(words)-1:
-              if words[i] in vocabulary:
+              if normalize(words[i]) in vocabulary:
                 M[vocabulary.index(normalize(words[k])), vocabulary.index(normalize(words[i]))] += 1
             #    print (normalize(words[k]) + ' ' + normalize(words[i]) + ' ' + str(M[vocabulary.index(normalize(words[k])), vocabulary.index(normalize(words[i]))]))
 
@@ -48,7 +48,28 @@ def main():
     print(M[vocabulary.index(normalize(ws[0])),vocabulary.index(normalize(ws[1]))])
   except ValueError:
     print("Je ne trouve pas ce mot.")
+<<<<<<< HEAD
 
 
+=======
+  
+  N = np.zeros(M.shape)
+  N2 = np.zeros(M.shape)
+
+# normalisation des LIGNES (axis=0) par norme l1 : 
+  for i in range (M.shape[0]):
+    if np.linalg.norm(M, axis=0)[i] == 0 :   # eviter division par 0
+      N[:,i] = M[:,i]
+    else:
+      N[i] = M[i] / np.sum(M,axis=1)[i]
+
+# normalisation des colonnes par norme l2 :
+  for i in range (M.shape[1]):
+    if np.linalg.norm(M, axis=0)[i] == 0 :   # eviter division par 0
+      N[:,i] = M[:,i]
+    else:
+      N[:,i] = M[:,i] / np.linalg.norm(M,axis=0)[i]
+  
+>>>>>>> branche/master
 if __name__ == '__main__':
   main()
